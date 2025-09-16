@@ -1,0 +1,7 @@
+fastapi
+sqlalchemy
+flake8
+isort
+black
+mypy
+pydantic
