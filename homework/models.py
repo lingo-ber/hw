@@ -18,7 +18,9 @@ class Recipe(Base):
 
     __tablename__ = "Recipe"
     id: Mapped[int] = mapped_column(primary_key=True)
-    dish_name: Mapped[str] = mapped_column(String(100), index=True, nullable=False, unique=True)
+    dish_name: Mapped[str] = mapped_column(
+        String(100), index=True, nullable=False, unique=True
+    )
     cooking_time: Mapped[int] = mapped_column(index=True)
     ingredients: Mapped[str] = mapped_column()
     description: Mapped[str] = mapped_column(Text)
