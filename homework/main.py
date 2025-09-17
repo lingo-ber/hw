@@ -15,8 +15,10 @@ async def lifespan(app: FastAPI):
     """
     Обработчик событий запуска и завершения работы приложения.
 
+
     При запуске создаёт все таблицы в базе данных, 
     определённые в моделях SQLAlchemy.
+    
     По завершении работы закрывает соединение с базой данных 
     и освобождает ресурсы движка.
     """
@@ -27,6 +29,7 @@ async def lifespan(app: FastAPI):
     # код при завершении
     await session.close()
     await engine.dispose()
+
 
 app = FastAPI(lifespan=lifespan)
 
