@@ -1,6 +1,6 @@
+from contextlib import asynccontextmanager
 from typing import Sequence
 
-from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.future import select
