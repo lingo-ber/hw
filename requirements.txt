@@ -8,3 +8,5 @@ mypy
 pydantic
 pytest
 aiosqlite
+flake8-bugbear
+flake8-pie
