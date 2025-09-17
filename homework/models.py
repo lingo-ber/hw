@@ -16,7 +16,7 @@ class Recipe(Base):
         views (int): количество просмотров
     """
 
-    __tablename__ = 'Recipe'
+    __tablename__ = "Recipe"
     id = Column(Integer, primary_key=True)
     dish_name = Column(String(100), index=True, nullable=False, unique=True)
     cooking_time = Column(Integer, index=True)
