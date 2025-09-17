@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy.orm import Mapped, mapped_column
 
 from .database import Base
 
@@ -17,9 +17,9 @@ class Recipe(Base):
     """
 
     __tablename__ = "Recipe"
-    id = Column(Integer, primary_key=True)
-    dish_name = Column(String(100), index=True, nullable=False, unique=True)
-    cooking_time = Column(Integer, index=True)
-    ingredients = Column(String)
-    description = Column(Text)
-    views = Column(Integer, index=True, default=0)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    dish_name: Mapped[str] = mapped_column(String(100), index=True, nullable=False, unique=True)
+    cooking_time: Mapped[int] = mapped_column(index=True)
+    ingredients: Mapped[str] = mapped_column()
+    description: Mapped[str] = mapped_column(Text)
+    views: Mapped[int] = mapped_column(index=True, default=0)
