@@ -11,7 +11,7 @@ from .database import engine, session
 
 
 @asynccontextmanager
-async def lifespan() -> AsyncGenerator[None, None]:
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """
     Обработчик событий запуска и завершения работы приложения.
 
