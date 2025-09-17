@@ -5,3 +5,4 @@ isort
 black
 mypy
 pydantic
+pytest
