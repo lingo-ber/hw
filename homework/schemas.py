@@ -1,8 +1,6 @@
 from pydantic import BaseModel, Field
 
 
-
-
 class RecipeBase(BaseModel):
     """
     Базовая модель данных рецепта.
