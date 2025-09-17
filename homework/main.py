@@ -60,7 +60,7 @@ async def add_recipe(recipe: schemas.RecipeIn) -> models.Recipe:
 
 
 @app.get("/recipes", response_model=list[schemas.RecipesListOut])
-async def get_recipes() -> list[models.Recipe]:
+async def get_recipes() -> Sequence[models.Recipe]:
     """
     Эндпоинт для получения списка всех рецептов.
 
