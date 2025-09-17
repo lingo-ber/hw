@@ -12,6 +12,7 @@ from .database import engine, session
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # fmt: off
     """
     Обработчик событий запуска и завершения работы приложения.
     
@@ -21,6 +22,8 @@ async def lifespan(app: FastAPI):
     По завершении работы закрывает соединение с базой данных 
     и освобождает ресурсы движка.
     """
+    # fmt: on
+    
     # код при старте
     async with engine.begin() as conn:
         await conn.run_sync(models.Base.metadata.create_all)
