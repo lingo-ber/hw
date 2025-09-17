@@ -1,6 +1,6 @@
-from sqlalchemy import Column, String, Integer, Text
-from .database import Base
+from sqlalchemy import Column, Integer, String, Text
 
+from .database import Base
 
 
 class Recipe(Base):

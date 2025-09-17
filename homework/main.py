@@ -1,11 +1,9 @@
 from fastapi import FastAPI, HTTPException
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.future import select
 from sqlalchemy.sql.expression import desc
-from sqlalchemy.exc import IntegrityError
-from . import models
-from . import schemas
+from . import models, schemas
 from .database import engine, session
-
 
 app = FastAPI()
 
