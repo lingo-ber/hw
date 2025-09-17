@@ -24,8 +24,6 @@ class RecipeIn(RecipeBase):
     используется при приёме данных рецепта от клиента.
     """
 
-    pass
-
 
 class RecipeOut(RecipeBase):
     """
