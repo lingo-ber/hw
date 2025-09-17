@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.future import select
 from sqlalchemy.sql.expression import desc
+from typing import Sequence
 
 from . import models, schemas
 from .database import engine, session
