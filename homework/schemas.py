@@ -20,7 +20,8 @@ class RecipeBase(BaseModel):
 
 class RecipeIn(RecipeBase):
     """
-    Модель-наследник от RecipeBase, используется при приёме данных рецепта от клиента.
+    Модель-наследник от RecipeBase,
+    используется при приёме данных рецепта от клиента.
     """
 
     pass
@@ -28,7 +29,8 @@ class RecipeIn(RecipeBase):
 
 class RecipeOut(RecipeBase):
     """
-    Модель-наследник от RecipeBase, используется при выводе данных рецепта клиенту.
+    Модель-наследник от RecipeBase,
+    используется при выводе данных рецепта клиенту.
 
     Attributes:
         id (int): идентификатор рецепта
@@ -57,7 +59,8 @@ class RecipesListBase(BaseModel):
 
 class RecipesListOut(RecipesListBase):
     """
-    Модель-наследник от RecipesListBase, используется при выводе списка рецептов клиенту.
+    Модель-наследник от RecipesListBase,
+    используется при выводе списка рецептов клиенту.
 
     Attributes:
         id (int): идентификатор записи
