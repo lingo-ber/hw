@@ -11,7 +11,7 @@ from .database import engine, session
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan():
     """
     Обработчик событий запуска и завершения работы приложения.
 
@@ -49,7 +49,7 @@ async def add_recipe(recipe: schemas.RecipeIn) -> models.Recipe:
     Returns:
         models.Recipe: добавленный рецепт
     """
-    new_recipe = models.Recipe(**recipe.dict())
+    new_recipe = models.Recipe(**recipe.model_dump())
     try:
         session.add(new_recipe)
         await session.commit()
