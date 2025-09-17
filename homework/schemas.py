@@ -11,6 +11,7 @@ class RecipeBase(BaseModel):
         ingredients (str): список ингредиентов
         description (str): описание рецепта
     """
+
     dish_name: str = Field(max_length=100)
     cooking_time: int = Field(gt=0)
     ingredients: str
@@ -21,6 +22,7 @@ class RecipeIn(RecipeBase):
     """
     Модель-наследник от RecipeBase, используется при приёме данных рецепта от клиента.
     """
+
     pass
 
 
@@ -31,12 +33,11 @@ class RecipeOut(RecipeBase):
     Attributes:
         id (int): идентификатор рецепта
     """
+
     id: int
 
     class Config:
         orm_mode = True
-
-
 
 
 class RecipesListBase(BaseModel):
@@ -48,6 +49,7 @@ class RecipesListBase(BaseModel):
         views (int): количество просмотров рецепта
         cooking_time (int): время приготовления в минутах
     """
+
     dish_name: str = Field(max_length=100)
     views: int = Field(ge=0)
     cooking_time: int = Field(gt=0)
@@ -60,6 +62,7 @@ class RecipesListOut(RecipesListBase):
     Attributes:
         id (int): идентификатор записи
     """
+
     id: int
 
     class Config:

@@ -15,6 +15,7 @@ class Recipe(Base):
         description (str): описание рецепта (без ограничения длины)
         views (int): количество просмотров
     """
+
     __tablename__ = 'Recipe'
     id = Column(Integer, primary_key=True)
     dish_name = Column(String(100), index=True, nullable=False, unique=True)

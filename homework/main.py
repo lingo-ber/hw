@@ -9,7 +9,7 @@ from .database import engine, session
 app = FastAPI()
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 async def startup() -> None:
     """
     Обработчик события запуска приложения.
@@ -20,7 +20,7 @@ async def startup() -> None:
         await conn.run_sync(models.Base.metadata.create_all)
 
 
-@app.on_event('shutdown')
+@app.on_event("shutdown")
 async def shutdown() -> None:
     """
     Обработчик события завершения работы приложения.
@@ -31,7 +31,7 @@ async def shutdown() -> None:
     await engine.dispose()
 
 
-@app.post('/recipes', response_model=schemas.RecipeOut)
+@app.post("/recipes", response_model=schemas.RecipeOut)
 async def add_recipe(recipe: schemas.RecipeIn) -> models.Recipe:
     """
     Эндпоинт для добавления нового рецепта.
@@ -53,11 +53,13 @@ async def add_recipe(recipe: schemas.RecipeIn) -> models.Recipe:
         session.add(new_recipe)
         await session.commit()
     except IntegrityError:
-        raise HTTPException(status_code=409, detail='Recipe with this name already exists')
+        raise HTTPException(
+            status_code=409, detail="Recipe with this name already exists"
+        )
     return new_recipe
 
 
-@app.get('/recipes', response_model=list[schemas.RecipesListOut])
+@app.get("/recipes", response_model=list[schemas.RecipesListOut])
 async def get_recipes() -> list[models.Recipe]:
     """
     Эндпоинт для получения списка всех рецептов.
@@ -68,12 +70,14 @@ async def get_recipes() -> list[models.Recipe]:
     Returns:
         list[models.Recipe]: список рецептов (метаданные рецептов)
     """
-    stmt = select(models.Recipe).order_by(desc(models.Recipe.views), models.Recipe.cooking_time)
+    stmt = select(models.Recipe).order_by(
+        desc(models.Recipe.views), models.Recipe.cooking_time
+    )
     res = await session.execute(stmt)
     return res.scalars().all()
 
 
-@app.get('/recipes/{recipe_id}', response_model=schemas.RecipeOut)
+@app.get("/recipes/{recipe_id}", response_model=schemas.RecipeOut)
 async def get_recipe(recipe_id: int) -> models.Recipe:
     """
     Эндпоинт для получения рецепта по его ID.
@@ -89,10 +93,12 @@ async def get_recipe(recipe_id: int) -> models.Recipe:
     Returns:
         models.Recipe: данные рецепта
     """
-    res = await session.execute(select(models.Recipe).where(models.Recipe.id == recipe_id))
+    res = await session.execute(
+        select(models.Recipe).where(models.Recipe.id == recipe_id)
+    )
     recipe = res.scalars().first()
     if recipe is None:
-        raise HTTPException(status_code=404, detail='Recipe not found')
+        raise HTTPException(status_code=404, detail="Recipe not found")
     recipe.views += 1
     await session.commit()
     return recipe
