@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-from typing import Sequence
+from typing import AsyncGenerator, Sequence
 
 from fastapi import FastAPI, HTTPException
 from sqlalchemy.exc import IntegrityError
@@ -11,7 +11,7 @@ from .database import engine, session
 
 
 @asynccontextmanager
-async def lifespan():
+async def lifespan() -> AsyncGenerator[None, None]:
     """
     Обработчик событий запуска и завершения работы приложения.
 
