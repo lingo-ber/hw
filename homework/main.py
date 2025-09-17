@@ -1,5 +1,6 @@
 from typing import Sequence
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.future import select
@@ -8,29 +9,26 @@ from sqlalchemy.sql.expression import desc
 from . import models, schemas
 from .database import engine, session
 
-app = FastAPI()
 
-
-@app.on_event("startup")
-async def startup() -> None:
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     """
-    Обработчик события запуска приложения.
+    Обработчик событий запуска и завершения работы приложения.
 
-    Создаёт все таблицы в базе данных, определённые в моделях SQLAlchemy.
+    При запуске создаёт все таблицы в базе данных, 
+    определённые в моделях SQLAlchemy.
+    По завершении работы закрывает соединение с базой данных 
+    и освобождает ресурсы движка.
     """
+    # код при старте
     async with engine.begin() as conn:
         await conn.run_sync(models.Base.metadata.create_all)
-
-
-@app.on_event("shutdown")
-async def shutdown() -> None:
-    """
-    Обработчик события завершения работы приложения.
-
-    Закрывает соединение с базой данных и освобождает ресурсы движка.
-    """
+    yield
+    # код при завершении
     await session.close()
     await engine.dispose()
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.post("/recipes", response_model=schemas.RecipeOut)
