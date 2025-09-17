@@ -26,13 +26,13 @@ jobs:
         run: isort --diff --check-only --profile black homework
 
       - name: black
-        run: black --check homework
-
-      - name: mypy
-        run: mypy homework
+        run: black --check --diff homework
 
       - name: flake8
         run: flake8 homework
+
+      - name: mypy
+        run: mypy homework
 
       - name: test
         run: |
